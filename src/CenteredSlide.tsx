@@ -21,15 +21,22 @@ function CenteredSlide({
   contentTextClass,
   imageArrayBoxClass
 }: {
-  headerClass: string;
+  headerClass?: string;
   title: string;
-  subTitle: string;
-  imagesArray: Array<{
+  subTitle?: string;
+  imagesArray?: Array<{
     flex: number;
     image: string | null;
     description: string;
   }>;
-  textArray: Array<string>;
+  textArray?: Array<{
+    text: string;
+    color: string;
+    children?: Array<{
+      text: string;
+      color: string;
+    }>;
+  }>;
   contentBoxClass: string;
   contentTextClass: string;
   imageArrayBoxClass: string;
@@ -47,7 +54,7 @@ function CenteredSlide({
         </h1>
       </div>
       <div className={`${contentBoxClass} content-box`}>
-        {imagesArray?.length > 0 ? (
+        {imagesArray && imagesArray.length > 0 ? (
           <div className="content-images">
             {imagesArray.map((a) => (
               <figure
@@ -55,24 +62,24 @@ function CenteredSlide({
                 className={`${imageArrayBoxClass} imgArray-box`}
                 style={a.flex ? { flex: a.flex } : { flex: 1 }}
               >
-                <img src={a.image ? a.image : null} alt={a.description} />
+                {a.image && <img src={a.image} alt={a.description} />}
                 <figcaption className="text-center">{a.description}</figcaption>
               </figure>
             ))}
           </div>
         ) : (
           <div className={`${contentTextClass} content-text`}>
-            {textArray.map((a) => {
-              if (a.length > 0) {
+            {textArray &&
+              textArray.map((a) => {
                 return (
-                  <>
-                    <div key={uuidv4()} className="text">
-                      <p key={uuidv4()} style={{ color: a[0].color }}>
-                        {a[0].text}
+                  <div key={uuidv4()} className="text">
+                    <div className="text-item" key={uuidv4()}>
+                      <p key={uuidv4()} style={{ color: a.color }}>
+                        {a.text}
                       </p>
-                      {a.text.length > 1 && (
-                        <ul>
-                          {a[1].map((b) => {
+                      {a.children && (
+                        <ul key={uuidv4()}>
+                          {a.children.map((b) => {
                             return (
                               <li key={uuidv4()} style={{ color: b.color }}>
                                 {b.text}
@@ -82,19 +89,9 @@ function CenteredSlide({
                         </ul>
                       )}
                     </div>
-                  </>
+                  </div>
                 );
-              }
-              // if (a.length === 0) {
-              return (
-                <div key={uuidv4()} className="text">
-                  <p key={uuidv4()} style={{ color: a.color }}>
-                    {a.text}
-                  </p>
-                </div>
-              );
-              // }
-            })}
+              })}
           </div>
         )}
       </div>
