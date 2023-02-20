@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
 import './styling.css';
 
 /**
@@ -20,6 +20,18 @@ import './styling.css';
  * -- ref,
   rightChildBoxClass
  */
+interface SplitSlideChildProps {
+  headerClass?: string;
+  h1Class?: string;
+  title?: string;
+  subTitle?: string;
+  leftBoxClass?: string;
+  textArray?: Array<{ text: string; color: string }>;
+  children?: React.ReactNode;
+  ref?: React.RefObject<HTMLDivElement>;
+  rightChildBoxClass?: string;
+  embed?: { url: string; title: string };
+}
 
 function SplitSlideEmbed({
   headerClass,
@@ -30,58 +42,49 @@ function SplitSlideEmbed({
   textArray,
   rightChildBoxClass,
   embed
-}) {
+}: SplitSlideChildProps) {
   return (
     <div>
       <div className={`${headerClass} header`}>
-        <h1 className={h1Class ? h1Class : null}>
-          {title} {subTitle ? <><br /> {subTitle}</> : null}
+        <h1 className={h1Class ? h1Class : ''}>
+          {title}{' '}
+          {subTitle ? (
+            <>
+              <br /> {subTitle}
+            </>
+          ) : null}
         </h1>
       </div>
       <div className="split-container">
-        <div className={leftBoxClass ? leftBoxClass : "left-box"}>
-          {typeof textArray !== 'object' ?
-            console.error("textArray prop must be included, and it should have the following data format: [{text: 'string', color: 'string'}]") :
-            textArray.map(a => {
+        <div className={leftBoxClass ? leftBoxClass : 'left-box'}>
+          {textArray &&
+            textArray.map((a) => {
               return (
-                <p
-                  key={uuidv4()}
-                  style={{ color: a.color }}>
+                <p key={uuidv4()} style={{ color: a.color }}>
                   {a.text}
                 </p>
-              )
+              );
             })}
         </div>
         <div
-          className={rightChildBoxClass ? `${rightChildBoxClass} right-box` : "right-box"}>
-          <div className="ratio ratio-16x9 embed-box">
-            <iframe src={embedTitle.url} title={embed.title} allowFullScreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" />
-          </div>
+          className={
+            rightChildBoxClass ? `${rightChildBoxClass} right-box` : 'right-box'
+          }
+        >
+          {embed && (
+            <div className="ratio ratio-16x9 embed-box">
+              <iframe
+                src={embed.url}
+                title={embed.title}
+                allowFullScreen
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
-  )
-};
-
-SplitSlideEmbed.propTypes = {
-  headerClass: PropTypes.string,
-  h1Class: PropTypes.string,
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  leftBoxClass: PropTypes.string,
-  textArray: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string,
-    color: PropTypes.string
-  })),
-  embedTitle: PropTypes.shape({
-    text: PropTypes.string,
-    url: PropTypes.string
-  }),
-  ref: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.any })
-  ]),
-  rightChildBoxClass: PropTypes.string,
-};
+  );
+}
 
 export default SplitSlideEmbed;

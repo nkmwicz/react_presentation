@@ -1,5 +1,6 @@
+import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types'
+import * as PropTypes from 'prop-types';
 
 /**
  * SplitSlideChild operates similarly to splitSlide, but instead
@@ -19,6 +20,18 @@ import PropTypes from 'prop-types'
  * -- ref,
   rightChildBoxClass
  */
+interface SplitSlideChildProps {
+  headerClass?: string;
+  h1Class?: string;
+  title?: string;
+  subTitle?: string;
+  leftBoxClass?: string;
+  textArray?: Array<{ text: string; color: string }>;
+  children?: React.ReactNode;
+  ref?: React.RefObject<HTMLDivElement>;
+  rightChildBoxClass?: string;
+  childComponent?: React.ReactNode;
+}
 
 function SplitSlideChild({
   headerClass,
@@ -29,38 +42,46 @@ function SplitSlideChild({
   textArray,
   children,
   ref,
-  rightChildBoxClass
-}) {
+  rightChildBoxClass,
+  childComponent
+}: SplitSlideChildProps) {
   return (
     <div>
       <div className={`${headerClass} header`}>
-        <h1 className={h1Class ? h1Class : null}>
-          {title} {subTitle ? <><br /> {subTitle}</> : null}
+        <h1 className={h1Class ? h1Class : ''}>
+          {title}{' '}
+          {subTitle ? (
+            <>
+              <br /> {subTitle}
+            </>
+          ) : null}
         </h1>
       </div>
       <div className="split-container">
-        <div className={leftBoxClass ? leftBoxClass : "left-box"}>
-          {typeof textArray !== 'object' ?
-            console.error("textArray prop must be included, and it should have the following data format: [{text: 'string', color: 'string'}]") :
-            textArray.map(a => {
+        <div className={leftBoxClass ? leftBoxClass : 'left-box'}>
+          {textArray &&
+            textArray.map((a) => {
               return (
-                <p
-                  key={uuidv4()}
-                  style={{ color: a.color }}>
+                <p key={uuidv4()} style={{ color: a.color }}>
                   {a.text}
                 </p>
-              )
+              );
             })}
         </div>
         <div
           ref={ref}
-          className={rightChildBoxClass ? `${rightChildBoxClass} right-child-box` : "right-child-box"}>
-          {children}
+          className={
+            rightChildBoxClass
+              ? `${rightChildBoxClass} right-child-box`
+              : 'right-child-box'
+          }
+        >
+          {childComponent || children}
         </div>
       </div>
     </div>
-  )
-};
+  );
+}
 
 SplitSlideChild.propTypes = {
   headerClass: PropTypes.string,
@@ -68,16 +89,18 @@ SplitSlideChild.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
   leftBoxClass: PropTypes.string,
-  textArray: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string,
-    color: PropTypes.string
-  })),
+  textArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+      color: PropTypes.string
+    })
+  ),
   children: PropTypes.element.isRequired,
   ref: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.any })
   ]),
-  rightChildBoxClass: PropTypes.string,
+  rightChildBoxClass: PropTypes.string
 };
 
 export default SplitSlideChild;
