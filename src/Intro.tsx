@@ -29,7 +29,7 @@ function Intro({
   title?: string;
   subTitle?: string;
   byLine?: string;
-  bgImage?: React.CSSProperties;
+  bgImage?: React.CSSProperties['backgroundImage'];
   bgColor?: string;
   titleBoxClass?: string;
   backgroundClass?: string;
