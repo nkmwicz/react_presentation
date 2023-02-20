@@ -15,8 +15,8 @@ function CenteredSlide({
   headerClass,
   title,
   subTitle,
-  imagesArray,
-  textArray,
+  images,
+  text,
   contentBoxClass,
   contentTextClass,
   imageArrayBoxClass
@@ -24,12 +24,12 @@ function CenteredSlide({
   headerClass?: string;
   title: string;
   subTitle?: string;
-  imagesArray?: Array<{
+  images?: Array<{
     flex: number;
     image: string | null;
     description: string;
   }>;
-  textArray?: Array<{
+  text?: Array<{
     text: string;
     color: string;
     children?: Array<{
@@ -37,9 +37,9 @@ function CenteredSlide({
       color: string;
     }>;
   }>;
-  contentBoxClass: string;
-  contentTextClass: string;
-  imageArrayBoxClass: string;
+  contentBoxClass?: string;
+  contentTextClass?: string;
+  imageArrayBoxClass?: string;
 }) {
   return (
     <div className="cover">
@@ -54,9 +54,9 @@ function CenteredSlide({
         </h1>
       </div>
       <div className={`${contentBoxClass} content-box`}>
-        {imagesArray && imagesArray.length > 0 ? (
+        {images && images.length > 0 ? (
           <div className="content-images">
-            {imagesArray.map((a) => (
+            {images.map((a) => (
               <figure
                 key={uuidv4()}
                 className={`${imageArrayBoxClass} imgArray-box`}
@@ -69,8 +69,8 @@ function CenteredSlide({
           </div>
         ) : (
           <div className={`${contentTextClass} content-text`}>
-            {textArray &&
-              textArray.map((a) => {
+            {text &&
+              text.map((a) => {
                 return (
                   <div key={uuidv4()} className="text">
                     <div className="text-item" key={uuidv4()}>
