@@ -11,7 +11,11 @@ body{
 }
 
 p {
-  font-size: calc(10px + 1vw);
+  font-size: calc(10px + 1vw) !important;
+}
+
+li {
+  font-size: calc(10px + 1vw) !important;
 }
 
 .main{
@@ -56,7 +60,7 @@ p {
   display: flex;
   width: 100vw;
   text-align: center;
-  color: black;
+  /* color: black; */
   top: 1vh;
   left: 0;
   height: 10vh;
@@ -102,18 +106,20 @@ h1 {
   display: flex;
   flex: 1;
   width: calc(33vw - 60px); 
-  left: 50px;
+  /* left: 50px; */
   top: 15vh;
   height: 75vh;
-  padding: 0 0px 0 50px;
+  padding: 0 0px 0 10px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items:center;
   justify-content: space-around;
 }
 
 .left-text-container {
   position: relative;
-  margin: auto
+  margin: auto;
+  padding: 0 10px;
+  text-align: center;
 }
 
 .right-box{
@@ -127,6 +133,16 @@ h1 {
   padding: 0 20px;
   align-items: center;
   justify-content: center;
+}
+
+.right-child-box {
+  flex: 2;
+  width: calc(66vw - 60px);
+  top: 15vh;
+  height: 75vh;
+  margin: 0 10px;
+  border: solid black 1px;
+  border-radius: 5pt;
 }
 
 .img-box{
@@ -180,12 +196,13 @@ button:disabled {
 
 .content-box{
   position: absolute;
-  width: 80%;
+  width: 100vw;
   height: 80%;
-  padding: 0 20px;
+  padding: 0 calc(35px + 1.2vw);
   top: 15%;
-  left: 10%;
-  /* object-fit: contain; */
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
 }
 
 .content-images {
@@ -212,7 +229,7 @@ button:disabled {
 .content-text {
   height: 100%;
   width: 100%;
-  padding: 50px 0 0 0;
+  padding: 50px 20px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -220,25 +237,33 @@ button:disabled {
 }
 
 .text{
-  flex: 1,
+  flex: 1;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
 
-/* .content-box p {
-  font-size: 1.7em;
-} */
+.text-item{
+  margin: 0 10px;
+}
 
 .content-box li {
-  font-size: 1.5em;
+  font-size: calc(10px + 1vw) !important;
 }
 
 .cover {
   height: 100%;
   width: 100%;
-  /* background-color: rgb(218, 216, 214); */
 }
 
 .embed-box{
   position: relative;
   height: 100%;
   width: 100%;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
