@@ -1,7 +1,18 @@
-# nkm_react_presentation
+# Notification
+This repository is still in development, but will be available soon. 
 
-This repository provides simple react components for creating a basic slide show. The slide show does not operate like a normal website. Instead, it is designed to operate with state that is an array that can be iterated through to create the slideshow. There are four primary components: an Introductory slide, a split slide (a left box for text and a right box for an image), a centered slice (takes an array of images), and a split slide with a child (in which a map or some other website oriented object can be rendered).
+Please check back for updates.
+# react_presentation
+
+This repository provides simple react components for creating a basic slide show. The components handle text placement, image placement, etc. programmatically. All you have to do is pass in the text and images. This is best achieved with a state variable of an array of slide objects that can be iterated through with a filter function of a state management system selector (such as a selector in Recoil). There are five primary components: an Introductory `slide`, a split slide (a left box for text and a right box for an image), a centered slice (takes an array of images or an array of text), a split slide with a child (in which a map or some other website-oriented object can be rendered), and a splitembedded slide (a split slide with embedded content in the right box such as a YouTube video). The components are designed to be used with a state variable that determines what is displayed on the screen. The state variable is an array of objects. Each object represents a slide. The intro slide is a simple slide with a title and a subtitle. The split slide has a left box for text and a right box for an image. The centered slide has an array of images that are displayed in a row. The child slide is for rendering a map or some other website-oriented object. The slides are rendered in the order that they are in the array. 
+
+# Quick Start
+To get started import this package with `npm install react_presentation` or `yarn add react_presentation` and then import the components you want to use. The fastest way to get started is with the `Layout` component. `Layout` includes all the components available and renders them based on a state variable: `slide`. Each `slide` should have a type property that determines what type of slide is rendered. The type property can be `intro`, `split`, `centered`, `child`, or `embed`.
+
 # SlideState Example
+
+React_Presentation uses a state variable to determine what is displayed on the screen. The state variable is an array of objects. Each object represents a slide. The objects have a type property that determines what type of slide is rendered. The type property can be 'intro', 'split', 'centered', or 'child'. The intro slide is a simple slide with a title and a subtitle. The split slide has a left box for text and a right box for an image. The centered slide has an array of images that are displayed in a row. The child slide is for rendering a map or some other website-oriented object. The slides are rendered in the order that they are in the array. Below is an example of the SlideState:
+
 ```
 {images:["image_goes_here", "another_image"],
 slides: [{
