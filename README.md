@@ -109,6 +109,6 @@ function prevSlide(e) {
   }
 }
 ```
-`slideIndex` and `setSlideIndex` are the index of the slide show and are react useState variables. You must include in your own code: `const [slideIndex, setSlideIndex] = useState(0). `slideState` is the array of slides. It is similarly a state variable you must construct in your code. The function checks to see if the index is at the end of the array and if so, it resets the index to 0. If the index is not at the end of the array, it increments the index by 1. The same logic is used for the prevSlide function, but the index is decremented by 1.
+`slideIndex` and `setSlideIndex` are the index of the slide show and are react useState variables. You must include in your own code: `const [slideIndex, setSlideIndex] = useState(0)`. `slideState` is the array of slides. It is similarly a state variable you must construct in your code. The function checks to see if the index is at the end of the array and if so, it resets the index to 0. If the index is not at the end of the array, it increments the index by 1. The same logic is used for the prevSlide function, but the index is decremented by 1.
 
 The arrows component also takes a boolean as a prop that determines whether the arrows are visible or not. This is useful for hiding the arrows when you are at the end of the slide show
